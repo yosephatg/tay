@@ -3,7 +3,9 @@ package tay;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import tay.core.NutritionRepository;
 import tay.resource.EventResource;
+import tay.resource.NutritionResource;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,9 +33,14 @@ public class tayApplication extends Application<tayConfiguration> {
         DateFormat testDateFormat = new SimpleDateFormat(configuration.getDateFormat());
         environment.getObjectMapper().setDateFormat(testDateFormat);
 
+        NutritionRepository repo = new NutritionRepository();
+        NutritionResource nutritionResource = new NutritionResource(repo);
+        environment.jersey().register(nutritionResource);
 
         EventResource eventResource = new EventResource();
         environment.jersey().register(eventResource);
+
+
     }
 
 }
