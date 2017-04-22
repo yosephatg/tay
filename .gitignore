@@ -2,3 +2,7 @@
 .project
 .settings/
 target/
+
+# ignoring created files from import
+.idea/
+tay.iml
