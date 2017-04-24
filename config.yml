@@ -7,3 +7,8 @@ server:
   rootPath: /api/*
 
 dateFormat: yyyy-MM-dd'T'HH:mmZ
+
+database:
+  user: tay
+  password: tayfakepassword
+  url: jdbc:mysql://localhost:3306/tay
