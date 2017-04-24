@@ -33,13 +33,11 @@ public class NutritionResource {
 
     @GET
     @UnitOfWork
-    public List<Nutrition> allNutrition() throws IOException {
-        return nutritionDAO.findAll();
-    }
-
-    @GET
-    @UnitOfWork
-    public List<Nutrition> findByType(@QueryParam("type") Optional<String> type){
-        return nutritionDAO.findByType(type.get());
+    public List<Nutrition> allNutrition(@QueryParam("type") Optional<String> type) throws IOException {
+        if (type.isPresent()) {
+            return nutritionDAO.findByType(type.get());
+        } else {
+            return nutritionDAO.findAll();
+        }
     }
 }
