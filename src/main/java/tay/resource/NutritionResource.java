@@ -1,7 +1,9 @@
 package tay.resource;
 
+import io.dropwizard.hibernate.UnitOfWork;
 import tay.api.Nutrition;
 import tay.core.NutritionRepository;
+import tay.db.NutritionDAO;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,13 +19,20 @@ import java.util.*;
 @Produces(MediaType.APPLICATION_JSON)
 public class NutritionResource {
 
-    private NutritionRepository repo;
-    public NutritionResource(NutritionRepository repo) {
-        this.repo = repo;
+//    private NutritionRepository repo;
+//    public NutritionResource(NutritionRepository repo) {
+//        this.repo = repo;
+//    }
+
+    private NutritionDAO nutritionDAO;
+
+    public NutritionResource(NutritionDAO nutritionDAO) {
+        this.nutritionDAO = nutritionDAO;
     }
 
     @GET
+    @UnitOfWork
     public List<Nutrition> allNutrition() throws IOException {
-        return repo.findAll();
+        return nutritionDAO.findAll();
     }
 }
