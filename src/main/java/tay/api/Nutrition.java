@@ -20,7 +20,7 @@ public class Nutrition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     private String type;
     private int calories;
     private int protein;
