@@ -21,4 +21,10 @@ MySql First Time Setup Instructions
         user: tay
         password: tayfakepassword
         url: jdbc:mysql://localhost:3306/tay ```
-    * 
+
+Common pitfalls
+---------------
+
+1. Make sure your ubuntu isn't set up in PDT time! mysql-connector-java can't handle it
+    * if you already setup everything up and hit a timezone error, you need to reset your computers timezone to something different
+    * then go into mysql and change the timezone to match ```set GLOBAL time_zone = "-xx:xx""``` to match your computers timezone offset
