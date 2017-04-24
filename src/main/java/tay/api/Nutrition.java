@@ -1,6 +1,12 @@
 package tay.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by yoseph on 4/22/17.
@@ -8,23 +14,39 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="nutrition")
-@NamedQueries({
-        @NamedQuery(name = "tay.core.Nutrition.findAll",
-        query = "select n from Nutrition n"),
-        @NamedQuery(name = "tay.core.Nutrition.findByType",
-        query = "select n from Nutrition n where n.type like :type")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "tay.core.Nutrition.findAll",
+//        query = "select n from Nutrition n"),
+//        @NamedQuery(name = "tay.core.Nutrition.findByType",
+//        query = "select n from Nutrition n where n.type like :type")
+//})
 
 public class Nutrition {
 
     @Id
+    @Column(name = "id")
+    @JsonProperty
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
+    @Column(name = "type")
+    @NotNull
+    @JsonProperty
+    @Size(min = 2, max = 64)
     private String type;
-    private int calories;
-    private int protein;
-    private int fiber;
+
+    @NotNull
+    @JsonProperty
+    @Column(name = "calories")
+    private int calories = 0;
+
+    @Column(name = "protein")
+    @JsonProperty
+    private int protein = 0;
+
+    @Column(name = "fiber")
+    @JsonProperty
+    private int fiber = 0;
 
     public Nutrition() {
     }

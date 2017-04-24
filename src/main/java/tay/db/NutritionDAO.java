@@ -2,6 +2,7 @@ package tay.db;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import tay.api.Nutrition;
 
 import java.util.List;
@@ -17,14 +18,32 @@ public class NutritionDAO extends AbstractDAO<Nutrition> {
     }
 
     public List<Nutrition> findAll(){
-        return list(namedQuery("tay.core.Nutrition.findAll"));
+//        return (List<Nutrition>) currentSession().createQuery("From Nutrition");
+        Query query = currentSession().createQuery("From Nutrition");
+        List<Nutrition> results = query.list();
+        return results;
+    }
+
+    public Nutrition findById(int id) {
+        return (Nutrition) currentSession().get(Nutrition.class, id);
     }
 
     public List<Nutrition> findByType(String type){
-        StringBuilder builder = new StringBuilder("%");
-        builder.append(type).append("%");
-        return list(
-                namedQuery("tay.core.Nutrition.findByType")
-                        .setParameter("type", builder.toString()));
+//        StringBuilder builder = new StringBuilder("%");
+//        builder.append(type).append("%");
+//        return list(
+//                namedQuery("tay.core.Nutrition.findByType")
+//                        .setParameter("type", builder.toString()));
+        Query query = currentSession().createQuery("From Nutrition n where n.type like :n_type");
+        query.setParameter("n_type", type);
+        return query.list();
+    }
+
+    public Nutrition insert(Nutrition nutrition) {
+        return persist(nutrition);
+    }
+
+    public void delete(Nutrition nutrition){
+        currentSession().delete(nutrition);
     }
 }
