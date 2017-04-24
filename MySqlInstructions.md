@@ -16,6 +16,9 @@ MySql First Time Setup Instructions
     * ```mysql -u newuser -p```
 7. Create a new database
     * ```CREATE DATABASE tay;```
+7. Make sure to create the appropriate tables (for eg)
+    * ```CREATE TABLE nutrition( id bigint primary key not null auto_increment, type varchar(255) not null, calories int not null, protein int not null, fiber int not null );```
+
 7. Update config.yml to have the correct username/password/database
     * ```   
         user: tay
