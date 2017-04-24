@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Table(name="nutrition")
 @NamedQueries({
         @NamedQuery(name = "tay.core.Nutrition.findAll",
-        query = "select n from Nutrition n")
-//        @NamedQuery(name = "tay.core.Nutrition.findByName",
-//        query = "select n from Nutrition where n.type like :type")
+        query = "select n from Nutrition n"),
+        @NamedQuery(name = "tay.core.Nutrition.findByType",
+        query = "select n from Nutrition where n.type like :type")
 })
 
 public class Nutrition {

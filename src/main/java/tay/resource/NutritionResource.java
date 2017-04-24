@@ -8,6 +8,7 @@ import tay.db.NutritionDAO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.*;
@@ -34,5 +35,11 @@ public class NutritionResource {
     @UnitOfWork
     public List<Nutrition> allNutrition() throws IOException {
         return nutritionDAO.findAll();
+    }
+
+    @GET
+    @UnitOfWork
+    public List<Nutrition> findByType(@QueryParam("type") Optional<String> type){
+        return nutritionDAO.findByType(type.get());
     }
 }
