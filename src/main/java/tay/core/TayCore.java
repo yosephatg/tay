@@ -7,6 +7,7 @@ import tay.db.AuthTokenDAO;
 import tay.db.NutritionDAO;
 import tay.db.UserDAO;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -56,4 +57,10 @@ public class TayCore {
         // confirm they're accurate and return user
     }
 
+
+    // Nutrition
+
+    public List<Nutrition> findByUser(User user){
+        // call the nutritiondao.find
+    }
 }
