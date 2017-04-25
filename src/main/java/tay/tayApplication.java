@@ -13,6 +13,7 @@ import tay.api.User;
 import tay.auth.DefaultAuth;
 import tay.auth.TokenAuth;
 import tay.core.TayCore;
+import tay.db.AuthTokenDAO;
 import tay.db.NutritionDAO;
 import tay.db.UserDAO;
 import tay.resource.EventResource;
@@ -51,9 +52,10 @@ public class tayApplication extends Application<tayConfiguration> {
         // DAO
         final NutritionDAO nutritionDAO = new NutritionDAO(hibernateBundle.getSessionFactory());
         final UserDAO userDAO = new UserDAO(hibernateBundle.getSessionFactory());
+        final AuthTokenDAO authTokenDAO = new AuthTokenDAO(hibernateBundle.getSessionFactory());
 
         // Core
-        final TayCore tayCore = new TayCore(hibernateBundle.getSessionFactory(), userDAO, nutritionDAO);
+        final TayCore tayCore = new TayCore(hibernateBundle.getSessionFactory(), userDAO, nutritionDAO, authTokenDAO);
 
         // Resource
         NutritionResource nutritionResource = new NutritionResource(nutritionDAO);

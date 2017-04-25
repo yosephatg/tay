@@ -3,6 +3,7 @@ package tay.core;
 import org.hibernate.SessionFactory;
 import tay.api.Nutrition;
 import tay.api.User;
+import tay.db.AuthTokenDAO;
 import tay.db.NutritionDAO;
 import tay.db.UserDAO;
 
@@ -16,11 +17,13 @@ public class TayCore {
     private final SessionFactory sessionFactory;
     private final UserDAO userDAO;
     private final NutritionDAO nutritionDAO;
+    private final AuthTokenDAO authTokenDAO;
 
-    public TayCore(SessionFactory sessionFactory, UserDAO userDAO, NutritionDAO nutritionDAO) {
+    public TayCore(SessionFactory sessionFactory, UserDAO userDAO, NutritionDAO nutritionDAO, AuthTokenDAO authTokenDAO) {
         this.sessionFactory = sessionFactory;
         this.userDAO = userDAO;
         this.nutritionDAO = nutritionDAO;
+        this.authTokenDAO = authTokenDAO;
     }
 
     public SessionFactory getSessionFactory() {
