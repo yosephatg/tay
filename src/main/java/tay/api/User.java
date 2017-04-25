@@ -60,7 +60,7 @@ public class User implements Principal, Serializable{
         return name;
     }
 
-    @JsonProperty("token")  
+    @JsonProperty("token")
     public String getToken() {
         return token;
     }
