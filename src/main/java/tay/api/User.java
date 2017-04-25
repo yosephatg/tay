@@ -41,7 +41,6 @@ public class User implements Principal, Serializable{
     private Date createdAt;
 
     // this should not be in the DB!
-    @JsonProperty("token")
     private String token;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -61,6 +60,7 @@ public class User implements Principal, Serializable{
         return name;
     }
 
+    @JsonProperty("token")  
     public String getToken() {
         return token;
     }
