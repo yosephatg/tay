@@ -9,6 +9,7 @@ import tay.api.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by yoseph on 4/25/17.
@@ -44,5 +45,9 @@ public class AuthTokenDAO extends AbstractDAO<AuthToken>{
         Criteria criteria = currentSession().createCriteria(AuthToken.class);
         criteria.add(Restrictions.eq("cellNumber", cell));
         return list(criteria);
+    }
+
+    private String newToken(){
+        return UUID.randomUUID().toString();
     }
 }
