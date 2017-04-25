@@ -29,7 +29,7 @@ public class UserDAO extends AbstractDAO<User>{
     }
 
     public User add(???){
-
+        // from parameter, extract username and password and persist
     }
 
     public void update(User user) {
