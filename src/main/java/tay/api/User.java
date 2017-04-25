@@ -43,6 +43,11 @@ public class User implements Principal, Serializable{
     // this should not be in the DB!
     private String token;
 
+    @Column(name="cellNumber")
+    @NotNull
+    @Size(min = 10, max = 10)
+    private String cellNumber;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Nutrition> allNutrition = new ArrayList<>();
 
@@ -53,6 +58,14 @@ public class User implements Principal, Serializable{
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getCellNumber() {
+        return cellNumber;
+    }
+
+    public void setCellNumber(String cellNumber) {
+        this.cellNumber = cellNumber;
     }
 
     @Override
