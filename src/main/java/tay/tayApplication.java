@@ -1,11 +1,17 @@
 package tay;
 
 import io.dropwizard.Application;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import tay.api.Nutrition;
+import tay.api.User;
+import tay.auth.DefaultAuth;
+import tay.auth.TokenAuth;
 import tay.core.TayCore;
 import tay.db.NutritionDAO;
 import tay.db.UserDAO;
@@ -55,6 +61,15 @@ public class tayApplication extends Application<tayConfiguration> {
         EventResource eventResource = new EventResource();
         environment.jersey().register(eventResource);
 
+        // Auth. Gotta make sure i'm using the 2nd call correctly
+        final OAuthCredentialAuthFilter<User> authFilter = new
+                OAuthCredentialAuthFilter.Builder<User>()
+                    .setAuthenticator(new TokenAuth(tayCore))
+                    .setPrefix("Bearer")
+                    .setAuthorizer(new DefaultAuth())
+                    . buildAuthFilter();
+        environment.jersey().register(new AuthDynamicFeature(authFilter));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder(User.class));
 
         // Misc, figure out where these go!
         DateFormat testDateFormat = new SimpleDateFormat(configuration.getDateFormat());
