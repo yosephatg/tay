@@ -28,7 +28,6 @@ public class MessageReceiveResource {
 
 	@POST
 	public Response textMe(String request) throws ServletException {
-		//Calls util class to transform request into readable map
 		HashMap<String, String> requestMap = MessageUtils.requestToMap(request);
 		
 		try{
@@ -38,8 +37,7 @@ public class MessageReceiveResource {
 		} catch (IOException e) {
 		   // do something
 		}
-		//Build message to respond with (Necessary for Twilio API, can respond with
-		//nothing if we want
+		//required response
 		Message message = new Message.Builder()
 				.body(new Body("This is a response"))
 				.build();
