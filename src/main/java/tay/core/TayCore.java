@@ -33,34 +33,38 @@ public class TayCore {
 
     // USER
 
-    public User addUser(???) {
+    public User addUser(User user) {
         // get info from passed parameter
         // call userDao.add
+        //Optional<User> optional = userDAO.findByUsername(user.getUsername());
+        //if exists, throw exception
+        User user1 = userDAO.add(user);
+        return user1;
     }
 
-    public User update(???) {
+    //public User update(???) {
         // get info from passed parameter
         // call userDao.update
-    }
+    //}
 
-    public void changePassword(???) {
+    //public void changePassword(???) {
         // get info from passed parameter
         // call userDao.update
-    }
+    //}
 
-    public Optional<User> findUserByToken(String token) {
+    //public Optional<User> findUserByToken(String token) {
         // use token parameter, call authTokenDao.find, return user
-    }
+    //}
 
-    public Optional<User> login(???) {
+    //public Optional<User> login(???) {
         // passed in parameter should have username, password, token
         // confirm they're accurate and return user
-    }
+    //}
 
 
     // Nutrition
 
-    public List<Nutrition> findByUser(User user){
+    //public List<Nutrition> findByUser(User user){
         // call the nutritiondao.find
-    }
+    //}
 }

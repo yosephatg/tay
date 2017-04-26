@@ -30,9 +30,9 @@ public class AuthTokenDAO extends AbstractDAO<AuthToken>{
         return persist(authToken);
     }
 
-    public Optional<AuthToken> find(String token) {
+    //public Optional<AuthToken> find(String token) {
         //look for token, return it
-    }
+    //}
 
     public List<AuthToken> findByUser(User user) {
         Criteria criteria = currentSession().createCriteria(AuthToken.class);

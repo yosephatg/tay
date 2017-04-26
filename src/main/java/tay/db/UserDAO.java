@@ -28,8 +28,13 @@ public class UserDAO extends AbstractDAO<User>{
         return user;
     }
 
-    public User add(???){
+    public User add(User user){
         // from parameter, extract username and password and persist
+        User adding = new User();
+        adding.setUsername(user.getUsername());
+        adding.setPassword(user.getPassword());
+        adding = persist(adding);
+        return adding;
     }
 
     public void update(User user) {
