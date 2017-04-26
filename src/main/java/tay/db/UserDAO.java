@@ -32,7 +32,10 @@ public class UserDAO extends AbstractDAO<User>{
         // from parameter, extract username and password and persist
         User adding = new User();
         adding.setUsername(user.getUsername());
-        adding.setPassword(user.getPassword());
+//        adding.setPassword(user.getPassword());
+        adding.setPassword("fakepassword");
+        adding.setCellNumber(user.getCellNumber());
+        adding.setName(user.getName());
         adding = persist(adding);
         return adding;
     }

@@ -5,5 +5,5 @@ package tay.resource;
  */
 public class ResourceURL {
 
-    public static final String USER = "/api/users";
+    public static final String USER = "/users";
 }

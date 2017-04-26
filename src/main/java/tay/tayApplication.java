@@ -1,11 +1,14 @@
 package tay;
 
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import tay.api.Nutrition;
@@ -18,15 +21,30 @@ import tay.db.NutritionDAO;
 import tay.db.UserDAO;
 import tay.resource.EventResource;
 import tay.resource.NutritionResource;
+import tay.resource.UserResource;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class tayApplication extends Application<tayConfiguration> {
 
-    private final HibernateBundle<tayConfiguration> hibernateBundle = new HibernateBundle<tayConfiguration>(Nutrition.class){
+    private final HibernateBundle<tayConfiguration> hibernateBundle = new HibernateBundle<tayConfiguration>(Nutrition.class, User.class){
         @Override
         public DataSourceFactory getDataSourceFactory(tayConfiguration tayConfiguration) {
+            return tayConfiguration.getDataSourceFactory();
+        }
+
+        @Override
+        protected Hibernate5Module createHibernate5Module(){
+            Hibernate5Module module = super.createHibernate5Module();
+            module.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
+            return module;
+        }
+    };
+
+    private final MigrationsBundle<tayConfiguration> migrationsBundle = new MigrationsBundle<tayConfiguration>() {
+        @Override
+        public PooledDataSourceFactory getDataSourceFactory(tayConfiguration tayConfiguration) {
             return tayConfiguration.getDataSourceFactory();
         }
     };
@@ -43,6 +61,7 @@ public class tayApplication extends Application<tayConfiguration> {
     @Override
     public void initialize(final Bootstrap<tayConfiguration> bootstrap) {
         bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(migrationsBundle);
     }
 
     @Override
@@ -62,6 +81,8 @@ public class tayApplication extends Application<tayConfiguration> {
         environment.jersey().register(nutritionResource);
         EventResource eventResource = new EventResource();
         environment.jersey().register(eventResource);
+        UserResource userResource = new UserResource(tayCore);
+        environment.jersey().register(userResource);
 
         // Auth. Gotta make sure i'm using the 2nd call correctly
         final OAuthCredentialAuthFilter<User> authFilter = new

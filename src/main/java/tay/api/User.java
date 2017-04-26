@@ -1,6 +1,7 @@
 package tay.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Entity
 @Table(name="users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Principal, Serializable{
 
     @Id
@@ -33,14 +35,16 @@ public class User implements Principal, Serializable{
     @Column(name="name")
     private String name;
 
-    @NotNull
+//    @NotNull
     @Size(min = 5, max = 20)
+    @Column(name="password")
     private String password;
 
     @Column(name = "created_at", insertable = false, nullable = false, updatable = false)
     private Date createdAt;
 
     // this should not be in the DB!
+    @Transient
     private String token;
 
     @Column(name="cellNumber")
@@ -48,8 +52,8 @@ public class User implements Principal, Serializable{
     @Size(min = 10, max = 10)
     private String cellNumber;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Nutrition> allNutrition = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Nutrition> allNutrition = new ArrayList<>();
 
     public User() {
 
@@ -73,6 +77,7 @@ public class User implements Principal, Serializable{
         return name;
     }
 
+    @Transient
     @JsonProperty("token")
     public String getToken() {
         return token;
@@ -129,9 +134,9 @@ public class User implements Principal, Serializable{
     }
 
     // yoseph to refactor this later
-    public List<Nutrition> getAllNutrition() {
-        return allNutrition;
-    }
+//    public List<Nutrition> getAllNutrition() {
+//        return allNutrition;
+//    }
 
 //    public void setAllNutrition(List<Nutrition> allNutrition) {
 //        this.allNutrition = allNutrition;

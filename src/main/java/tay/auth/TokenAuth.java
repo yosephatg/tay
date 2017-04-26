@@ -20,11 +20,15 @@ public class TokenAuth implements Authenticator<String, User> {
 
     @Override
     public Optional<User> authenticate(String token) throws AuthenticationException {
-        java.util.Optional<User> possibleUser = tayCore.findUserByToken(token);
-        if (possibleUser.isPresent()) {
-            return Optional.of(possibleUser.get());
-        } else {
-            return Optional.empty();
-        }
+//        java.util.Optional<User> possibleUser = tayCore.findUserByToken(token);
+//        if (possibleUser.isPresent()) {
+//            return Optional.of(possibleUser.get());
+//        } else {
+//            return Optional.empty();
+//        }
+
+
+        //delete this, using it to compile
+        return Optional.empty();
     }
 }

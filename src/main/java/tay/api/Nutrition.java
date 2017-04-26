@@ -22,7 +22,7 @@ import java.io.Serializable;
 //        query = "select n from Nutrition n where n.type like :type")
 //})
 
-public class Nutrition implements Serializable{
+public class Nutrition implements Serializable {
 
     @Id
     @Column(name = "id")

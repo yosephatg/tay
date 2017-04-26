@@ -13,13 +13,13 @@ import java.util.Date;
 public class AuthToken implements Serializable{
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "created_at", insertable = false, nullable = false, updatable = false)
     private Date createdAt;
 
+    @Column(name="token")
     private String token;
 
     private User user;
@@ -48,6 +48,7 @@ public class AuthToken implements Serializable{
         this.token = token;
     }
 
+    @ManyToOne(optional = false)
     public User getUser() {
         return user;
     }
