@@ -7,3 +7,9 @@ server:
   rootPath: /api/*
 
 dateFormat: yyyy-MM-dd'T'HH:mmZ
+
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: tay
+  password: tayfakepassword
+  url: jdbc:mysql://localhost:3306/tay

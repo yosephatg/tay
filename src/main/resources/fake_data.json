@@ -1,0 +1,14 @@
+[
+  {
+    "type": "water",
+    "calories": 100,
+    "protein": 0,
+    "fiber": 0
+  },
+  {
+    "type": "water",
+    "calories": 250,
+    "protein": 0,
+    "fiber": 0
+  }
+]
