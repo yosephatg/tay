@@ -22,4 +22,8 @@ abstract class AbstractResource {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
+
+    public Response unauthorized() {
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }

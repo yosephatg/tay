@@ -22,6 +22,7 @@ public class AuthToken implements Serializable{
     @Column(name="token")
     private String token;
 
+    @ManyToOne(optional = false)
     private User user;
 
     public long getId() {
@@ -48,7 +49,6 @@ public class AuthToken implements Serializable{
         this.token = token;
     }
 
-    @ManyToOne(optional = false)
     public User getUser() {
         return user;
     }

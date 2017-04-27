@@ -1,16 +1,16 @@
 package tay.resource;
 
+import com.sun.org.apache.regexp.internal.RE;
 import io.dropwizard.hibernate.UnitOfWork;
 import tay.api.User;
 import tay.core.TayCore;
 
 import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.util.Optional;
 
 import static javax.ws.rs.core.Response.created;
 
@@ -43,4 +43,15 @@ public class UserResource extends AbstractResource{
         return created(user1, user1.getId());
     }
 
+    @POST
+    @UnitOfWork
+    @Path("/login")
+    public Response login(@Valid User user) {
+        Optional<User> user1 = tayCore.login(user);
+        if (user1.isPresent()) {
+            return ok(user1.get());
+        } else {
+            return unauthorized();
+        }
+    }
 }

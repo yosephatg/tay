@@ -11,6 +11,7 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import tay.api.AuthToken;
 import tay.api.Nutrition;
 import tay.api.User;
 import tay.auth.DefaultAuth;
@@ -28,7 +29,7 @@ import java.text.SimpleDateFormat;
 
 public class tayApplication extends Application<tayConfiguration> {
 
-    private final HibernateBundle<tayConfiguration> hibernateBundle = new HibernateBundle<tayConfiguration>(Nutrition.class, User.class){
+    private final HibernateBundle<tayConfiguration> hibernateBundle = new HibernateBundle<tayConfiguration>(Nutrition.class, User.class, AuthToken.class){
         @Override
         public DataSourceFactory getDataSourceFactory(tayConfiguration tayConfiguration) {
             return tayConfiguration.getDataSourceFactory();

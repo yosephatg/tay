@@ -115,7 +115,7 @@ public class User implements Principal, Serializable{
         this.username = username;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public String getPassword() {
         return password;
     }

@@ -1,6 +1,7 @@
 package tay.core;
 
 import org.hibernate.SessionFactory;
+import tay.api.AuthToken;
 import tay.api.Nutrition;
 import tay.api.User;
 import tay.db.AuthTokenDAO;
@@ -56,10 +57,26 @@ public class TayCore {
         // use token parameter, call authTokenDao.find, return user
     //}
 
-    //public Optional<User> login(???) {
-        // passed in parameter should have username, password, token
-        // confirm they're accurate and return user
-    //}
+    public Optional<User> login(User user) {
+//         passed in parameter should have username, password, token
+//         confirm they're accurate and return user
+        Optional<User> optUser = userDAO.findByUsername(user.getUsername());
+        if(optUser.isPresent()) {
+            User user1 = optUser.get();
+            if (user.getPassword().matches(user1.getPassword())) {
+                List<AuthToken> tokens = authTokenDAO.findByUser(user1);
+                if (tokens.isEmpty()) {
+                    AuthToken token = authTokenDAO.add(optUser.get());
+                    optUser.get().setToken(token.getToken());
+                    return optUser;
+                } else {
+                    optUser.get().setToken(tokens.get(0).getToken());
+                    return optUser;
+                }
+            }
+        }
+        return Optional.empty();
+    }
 
 
     // Nutrition
