@@ -18,11 +18,6 @@ import java.util.*;
 @Consumes(MediaType.APPLICATION_JSON)
 public class NutritionResource {
 
-//    private NutritionRepository repo;
-//    public NutritionResource(NutritionRepository repo) {
-//        this.repo = repo;
-//    }
-
     private NutritionDAO nutritionDAO;
 
     public NutritionResource(NutritionDAO nutritionDAO) {

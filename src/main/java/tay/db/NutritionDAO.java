@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import tay.api.Nutrition;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,13 @@ public class NutritionDAO extends AbstractDAO<Nutrition> {
     }
 
     public Nutrition findById(int id) {
-        return (Nutrition) currentSession().get(Nutrition.class, id);
+        Nutrition nut = get(id);
+        if (nut == null) {
+            throw new NotFoundException();
+        } else {
+            return nut;
+        }
+        //return (Nutrition) currentSession().get(Nutrition.class, id);
     }
 
     public List<Nutrition> findByType(String type){

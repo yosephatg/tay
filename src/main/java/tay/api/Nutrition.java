@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by yoseph on 4/22/17.
@@ -21,7 +22,7 @@ import javax.validation.constraints.Size;
 //        query = "select n from Nutrition n where n.type like :type")
 //})
 
-public class Nutrition {
+public class Nutrition implements Serializable {
 
     @Id
     @Column(name = "id")
