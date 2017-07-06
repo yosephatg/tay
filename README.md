@@ -11,7 +11,7 @@ Dev environment instructions
 ---
 
 1. Make sure you install MySql. Basic instructions for linux (ubuntu) located here https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-16-04
-2. 
+2. Follow the instructions [here](MySqlInstructions.md)
 
 Health Check
 ---
