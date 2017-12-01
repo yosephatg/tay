@@ -9,6 +9,8 @@ import tay.api.Nutrition;
 import tay.core.NutritionRepository;
 import tay.db.NutritionDAO;
 import tay.resource.EventResource;
+import tay.resource.MessageReceiveResource;
+import tay.resource.MessageSendResource;
 import tay.resource.NutritionResource;
 
 import java.text.DateFormat;
@@ -51,8 +53,12 @@ public class tayApplication extends Application<tayConfiguration> {
 
         EventResource eventResource = new EventResource();
         environment.jersey().register(eventResource);
-
-
+        
+        MessageSendResource messagesend = new MessageSendResource();
+        environment.jersey().register(messagesend);
+        
+        MessageReceiveResource messageReceive = new MessageReceiveResource();
+        environment.jersey().register(messageReceive);
     }
 
 }

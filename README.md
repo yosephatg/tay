@@ -17,3 +17,11 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+Twilio Integration
+---
+Tay can receive and send messages. In order to do this, you must have a valid Twilio phone number. Sign up for free [here.](https://www.twilio.com/try-twilio)
+
+In order to send messages to Twilio, Twilio uses webhooks, meaning your application must face the internet. In order to test this functionality, see [Twilio's blog post](https://www.twilio.com/blog/2013/10/test-your-webhooks-locally-with-ngrok.html) on the subject. 
+
+

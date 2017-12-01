@@ -41,6 +41,10 @@
             <artifactId>dropwizard-core</artifactId>
         </dependency>
         <dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+	    	<version>(7.0,7.9)</version>
+		</dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-hibernate</artifactId>
             <version>${dropwizard.version}</version>
